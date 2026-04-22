@@ -18,3 +18,4 @@ PRO23012,Yes,45,Active
 PRO20789,Yes,5,Active
 PRO23999,No,100,Active
 CAS12045,No,0,Active
+123456,No,0,Locked
