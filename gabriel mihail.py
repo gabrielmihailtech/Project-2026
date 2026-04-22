@@ -147,25 +147,45 @@ def percentage_types(ids):
     print(f"Professional gamers: {pro_percentage:.2f}%")
 
 
-# def write_status_files(ids, status):
-#     """
-#     Writes gamer IDs into separate files based on their account status.
-#     - Locked players → locked.txt
-#     - Active players → active.txt
-#     - Disabled players → disabled.txt
+def write_status_files(ids, status):
+    """
+    Writes gamer IDs into separate files based on their account status.
+    - Locked players → locked.txt
+    - Active players → active.txt
+    - Disabled players → disabled.txt
 
-#     Parameters:
-#         ids (list): List of gamer IDs
-#         status (list): List of gamer statuses (Active / Locked / Disabled)
+    Parameters:
+        ids (list): List of gamer IDs
+        status (list): List of gamer statuses (Active / Locked / Disabled)
 
-#     Returns:
-#         None
-#     """
+    Returns:
+        None
+    """
 
-#     # Open all three files in write mode (this clears old content)
-#     locked_file = open("locked.txt", "w")
-#     active_file = open("active.txt", "w")
-#     disabled_file = open("disabled.txt", "w")
+    # Open all three files in write mode (this clears old content)
+    locked_file = open("locked.txt", "w")
+    active_file = open("active.txt", "w")
+    disabled_file = open("disabled.txt", "w")
+
+    # Loop through all gamers and write their IDs to the appropriate file
+    for i in range(len(ids)):
+        player_id = ids[i]
+        player_status = status[i]
+
+        # Write each ID to the correct file based on status
+        if player_status == "Locked":
+            locked_file.write(player_id + "\n")
+        elif player_status == "Active":
+            active_file.write(player_id + "\n")
+        elif player_status == "Disabled":
+            disabled_file.write(player_id + "\n")
+
+    # Close all files
+    locked_file.close()
+    active_file.close()
+    disabled_file.close()       
+
+    print("Player IDs have been written to locked.txt, active.txt, and disabled.txt.")
 
 
 
@@ -180,7 +200,7 @@ def menu():
         print("3. Register new player")
         print("4. Update player status")
         print("5. Percentage of Casual vs Professional gamers")
-        print("6. Placeholder for Exam")
+        print("6. Write status files")
         print("7. Placeholder for Exam")
         print("8. Quit and save")
         choice = input("Enter choice: ")
@@ -196,7 +216,7 @@ def menu():
         elif choice == "5":
             percentage_types(ids)
         elif choice == "6":
-            pass
+            write_status_files(ids, status)
         elif choice == '7':
             pass
         elif choice == "8":
