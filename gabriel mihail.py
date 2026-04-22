@@ -147,6 +147,28 @@ def percentage_types(ids):
     print(f"Professional gamers: {pro_percentage:.2f}%")
 
 
+# def write_status_files(ids, status):
+#     """
+#     Writes gamer IDs into separate files based on their account status.
+#     - Locked players → locked.txt
+#     - Active players → active.txt
+#     - Disabled players → disabled.txt
+
+#     Parameters:
+#         ids (list): List of gamer IDs
+#         status (list): List of gamer statuses (Active / Locked / Disabled)
+
+#     Returns:
+#         None
+#     """
+
+#     # Open all three files in write mode (this clears old content)
+#     locked_file = open("locked.txt", "w")
+#     active_file = open("active.txt", "w")
+#     disabled_file = open("disabled.txt", "w")
+
+
+
 def menu():
     filename = "gamers.txt"
     ids, gdpr, days, status = read_file(filename)
