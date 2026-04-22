@@ -188,6 +188,33 @@ def write_status_files(ids, status):
     print("Player IDs have been written to locked.txt, active.txt, and disabled.txt.")
 
 
+def disable_unpaid_accounts(gdpr, status):
+    """
+    Disables accounts that have not paid the membership fee.
+    A player is disabled ONLY if:
+        - Their GDPR/paid value is "No"
+        - Their current status is "Active"
+
+    Locked or Disabled accounts are NOT changed.
+
+    Parameters:
+        gdpr (list): List containing "Yes" or "No" for payment status
+        status (list): List containing account statuses (Active / Locked / Disabled)
+
+    Returns:
+        int: Number of accounts that were updated (set to Disabled)
+    """
+
+    updated_count = 0  # Counter for how many accounts were changed
+
+    # Loop through all players
+    for i in range(len(status)):
+        # Check if the player has not paid and is currently Active
+        if gdpr[i] == "No" and status[i] == "Active":
+            status[i] = "Disabled"  # Update status to Disabled
+            updated_count += 1  # Increment the counter
+
+    return updated_count
 
 def menu():
     filename = "gamers.txt"
@@ -201,7 +228,7 @@ def menu():
         print("4. Update player status")
         print("5. Percentage of Casual vs Professional gamers")
         print("6. Write status files")
-        print("7. Placeholder for Exam")
+        print("7. Update unpaid accounts to Disabled")
         print("8. Quit and save")
         choice = input("Enter choice: ")
 
@@ -218,7 +245,8 @@ def menu():
         elif choice == "6":
             write_status_files(ids, status)
         elif choice == '7':
-            pass
+            updated_count = disable_unpaid_accounts(gdpr, status)
+            print(f"{updated_count} accounts have been updated to Disabled.")
         elif choice == "8":
             save_data(filename, ids, gdpr, days, status)
             print("Data saved. Goodbye.")
